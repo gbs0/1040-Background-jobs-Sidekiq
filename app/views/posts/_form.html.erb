@@ -1,0 +1,16 @@
+
+<%= simple_form_for(@post, data: {controller: "validation", "validation-target": "input"}) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :title, input_html: {data: {action: "blur->validation#validate"}} %>
+      <div data-validation-target="errorMessage"></div>
+
+    <%= f.input :content %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
